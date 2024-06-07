@@ -104,7 +104,7 @@ def _main(progname=None, args=None):
     parser = _parser(progname)
     ns = parser.parse_args(args)
 
-    tomlfile = pathlib.Path(ns.project_file)
+    tomlfile = pathlib.Path(ns.pyproject)
     if not tomlfile.exists() or not tomlfile.is_file():
         parser.error(f'could not find file `{tomlfile!r}`')
         sys.exit(1)
