@@ -57,7 +57,7 @@ def _parser(progname=None):
 
     parser.add_argument(
         '--pyproject',
-        default='../pyproject.toml',
+        default='pyproject.toml',
         help='path to pyproject.toml file'
     )
 

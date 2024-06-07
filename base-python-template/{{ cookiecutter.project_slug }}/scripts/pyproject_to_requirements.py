@@ -45,7 +45,7 @@ def main(args=None, do_exit: bool = True) -> int:
             _main(args)
         except SystemExit as e:
             return e.code
-        except BaseException:
+        except BaseException:  # noqa
             return 1
         return 0
     else:
@@ -56,9 +56,8 @@ def _main(args=None):
     parser = argparse.ArgumentParser(prog=sys.argv[0])
 
     parser.add_argument(
-        'pyproject',
-        nargs='?',
-        action='append',
+        '--pyproject',
+        default='pyproject.toml',
         help='location of the pyproject.toml file (default is "pyproject.toml")'
     )
 
@@ -87,7 +86,7 @@ def _main(args=None):
 
     ns = parser.parse_args(args)
 
-    pyproject_path = pathlib.Path('pyproject.toml' if not ns.pyproject else ns.pyproject[0])
+    pyproject_path = pathlib.Path(ns.pyproject)
     if not pyproject_path.exists() or not pyproject_path.is_file():
         parser.error(f'cannot find pyproject file {pyproject_path}')
         sys.exit(1)  # this is redundant because parser.error will exit. we keep it here for reasons.
@@ -96,7 +95,7 @@ def _main(args=None):
         with open(pyproject_path, "rb") as fd:
             pyproject = tomllib.load(fd)
     except BaseException:
-        parser.error(f"cannot read pyproject.toml file '{pyproject_path}'")
+        parser.error(f"cannot read pyproject.toml file '{pyproject_path}' (odds are the file has syntax errors)")
         raise SystemExit(1)  # again - this is redundant. we keep it here for reasons.
 
     output_dir = pathlib.Path(ns.output_dir)

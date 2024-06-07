@@ -101,7 +101,7 @@ else:
 try:
     with SwitchSysPath([os.getcwd(), *sys.path]):
         import scripts.pyproject_to_requirements  # noqa
-        scripts.pyproject_to_requirements.main(['pyproject.toml', '--all', '--output-dir=.'])
+        scripts.pyproject_to_requirements.main(['--pyproject=pyproject.toml', '--all', '--output-dir=.'])
 except BaseException as e:
     if not isinstance(e, SystemExit) or e.code != 0:
         print(f"warning: exception `{e}` raised while writing requirements files.", file=sys.stderr)
