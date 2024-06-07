@@ -1,0 +1,90 @@
+# ------------------
+# Build system info:
+# ------------------
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "setuptools-scm>=8.0"
+]
+build-backend = "setuptools.build_meta"
+
+
+# -------------
+# Project info:
+# -------------
+[project]
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.project_version }}"
+description = "{{ cookiecutter.project_short_description }}"
+authors = [{name="{{ cookiecutter.author_name }}", email="{{ cookiecutter.author_email }}"}]
+maintainers = [{name="{{ cookiecutter.author_name }}", email="{{ cookiecutter.author_email }}"}]
+license = {file = "LICENSE"}
+readme = "README.md"
+
+# Additional info - can be filled in manually later
+keywords = []
+classifiers = [
+    "Programming Language :: Python",
+]
+
+
+# Dependencies
+requires-python = ">= {{ cookiecutter.project_python_version }}"
+dependencies = [
+]
+
+# dynamic= ["dependencies"]
+
+
+# Optional dependencies (need these for testing + doc generation)
+[project.optional-dependencies]
+# key=[packages...]
+#     defines a special optional dependency which is installed
+#     pip install mypackage[key]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "jupyter",
+    "myst-nb",
+    "sphinx-autoapi",
+    "sphinx-rtd-theme",
+    "sphinx-markdown-builder",
+    "tomlkit"
+]
+
+
+{% if cookiecutter.remote_git_repo != '' %}
+# URLs
+[project.urls]
+{% if cookiecutter.remote_git_dir != '' -%}
+Homepage = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}/-/tree/{{ cookiecutter.remote_git_branch }}/{{ cookiecutter.remote_git_dir }}"
+Documentation = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}/-/tree/{{ cookiecutter.remote_git_branch }}/{{ cookiecutter.remote_git_dir }}/docs"
+{% else -%}
+Homepage = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}"
+Documentation = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}/-/tree/{{ cookiecutter.remote_git_branch }}/docs"
+{% endif -%}
+Repository = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}.git"
+{% endif %}
+
+
+[project.scripts]
+# key = "package.sub_package.module.myscript:entry_point"
+#     will deploy to `scripts/key' the script 'package.sub_package.module.myscript.py' and run it from entry_point()
+
+[project.gui-scripts]
+# same as project.scripts but for gui apps
+# (mostly used to prevent terminal pop-up in windows)
+
+# [tool.setuptools.dynamic]
+# dependencies = {file = ["requirements.txt"]}
+
+
+{% if cookiecutter.namespace_slug != '' %}
+# --------------------------
+# Handle namespace packages:
+# --------------------------
+[tool.setuptools.packages.find]
+# namespaces = true  # not required -- default, but here for documentation
+where = ["src"]
+include = ["{{ cookiecutter.namespace_slug }}", "{{ cookiecutter.namespace_slug }}.*"]
+{% endif %}

@@ -1,0 +1,49 @@
+{
+  "company": "",
+  "author_name":  "Michael Frank",
+  "author_email": "frankm@post.bgu.ac.il",
+
+  "namespace": "",
+  "namespace_slug": "{{ cookiecutter.namespace|lower|replace(' ', '-') }}",
+  "package_name": "",
+  "package_slug": "{{ cookiecutter.package_name|lower|replace(' ', '-') }}",
+  "project_name": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.namespace }}-{% else -%}{% endif -%}{{ cookiecutter.package_name }}",
+  "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+  "__import_slug": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.namespace_slug|replace('-', '_') }}.{% else -%}{% endif -%}{{ cookiecutter.package_slug|replace('-', '_') }}",
+
+  "project_short_description": "",
+  "project_version": "0.1.0",
+  "project_python_version": "3.12",
+
+  "project_license": [
+    "Proprietary",
+    "None",
+    "MIT",
+    "Apache License 2.0",
+    "GNU General Public License v3.0",
+    "CC0 v1.0 Universal",
+    "BSD 3-Clause"
+  ],
+
+  "remote_git_url": "github.com/michael-123123",
+  "remote_git_repo": "",
+  "remote_git_branch": "",
+  "remote_git_dir": "",
+  "remote_git_private": [
+    "Yes",
+    "No"
+  ],
+  "__default_lib_path": "pylibs",
+
+  "add_project_gitignore": [
+    "Yes",
+    "No"
+  ],
+
+  "__creator": "{{ cookiecutter.author_name }}",
+  "__owner": "{% if cookiecutter.company != '' %}{{ cookiecutter.company }}{% else %}{{ cookiecutter.author_name }}{% endif %}",
+
+  "__prompts__": {
+    "remote_git_dir": "remote_git_dir ('-' for default `<ns>/<ns>-<pkg>`)"
+  }
+}
