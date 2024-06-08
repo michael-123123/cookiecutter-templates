@@ -6,7 +6,7 @@
   "namespace": "",
   "namespace_slug": "{{ cookiecutter.namespace|lower|replace(' ', '-') }}",
   "package_name": "",
-  "package_slug": "{{ cookiecutter.package_name|lower|replace(' ', '-') }}",
+  "package_slug": "{{ cookiecutter.package_name|lower|replace(' ', '-')|replace('-', '_') }}",
   "project_name": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.namespace }}-{% else -%}{% endif -%}{{ cookiecutter.package_name }}",
   "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
   "__import_slug": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.namespace_slug|replace('-', '_') }}.{% else -%}{% endif -%}{{ cookiecutter.package_slug|replace('-', '_') }}",
