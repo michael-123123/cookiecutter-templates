@@ -4,12 +4,19 @@
   "author_email": "frankm@post.bgu.ac.il",
 
   "namespace": "",
-  "namespace_slug": "{{ cookiecutter.namespace|lower|replace(' ', '-') }}",
+  "__namespace_dash": "{{ cookiecutter.namespace|lower|replace(' ', '-') }}",
+  "__namespace_slug": "{{ cookiecutter.__namespace_dash|replace('-', '_') }}",
+
   "package_name": "",
-  "package_slug": "{{ cookiecutter.package_name|lower|replace(' ', '-')|replace('-', '_') }}",
+  "__package_dash": "{{ cookiecutter.package_name|lower|replace(' ', '-') }}",
+  "__package_slug": "{{ cookiecutter.__package_dash|replace('-', '_') }}",
+
   "project_name": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.namespace }}-{% else -%}{% endif -%}{{ cookiecutter.package_name }}",
-  "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
-  "__import_slug": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.namespace_slug|replace('-', '_') }}.{% else -%}{% endif -%}{{ cookiecutter.package_slug|replace('-', '_') }}",
+  "__project_dash": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+  "__project_slug": "{{ cookiecutter.__project_dash|replace('-', '_') }}",
+
+  "__dist_slug": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.__namespace_slug }}_{% else -%}{% endif -%}{{ cookiecutter.__package_slug }}",
+  "__import_slug": "{% if cookiecutter.namespace != '' -%}{{ cookiecutter.__namespace_slug }}.{% else -%}{% endif -%}{{ cookiecutter.__package_slug }}",
 
   "project_short_description": "",
   "project_version": "0.1.0",
@@ -26,24 +33,33 @@
   ],
 
   "remote_git_url": "github.com/michael-123123",
-  "remote_git_repo": "",
-  "remote_git_branch": "",
+  "remote_git_repo": "{{ cookiecutter.__project_dash }}",
+  "remote_git_branch": "main",
   "remote_git_dir": "",
-  "remote_git_private": [
-    "Yes",
-    "No"
-  ],
-  "__default_lib_path": "pylibs",
+  "remote_git_private": ["No", "Yes"],
 
-  "add_project_gitignore": [
-    "Yes",
-    "No"
-  ],
+  "__remote_git_base_path": "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}",
+  "__remote_git_branch_path": "{{ cookiecutter.__remote_git_base_path }}{% if cookiecutter.remote_git_branch != '' -%}/-/tree/{{ cookiecutter.remote_git_branch }}{% else -%}{% endif -%}",
+
+  "__remote_git_pip_install_https_repo": "git+https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}.git",
+  "__remote_git_pip_install_https_dir": "git+https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}.git@{{ cookiecutter.remote_git_branch }}#subdirectory={{ cookiecutter.remote_git_dir }}",
+  "__remote_git_pip_install_https": "{% if cookiecutter.remote_git_dir == '' -%} {{cookiecutter.__remote_git_pip_install_https_repo }} {% else -%} {{ cookiecutter.__project_dash }} @ {{ cookiecutter.__remote_git_pip_install_https_dir }} {% endif -%}",
+  "__remote_git_pip_install_ssh_repo": "git+ssh://git@{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}.git",
+  "__remote_git_pip_install_ssh_dir": "git+ssh://git@{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}.git@{{ cookiecutter.remote_git_branch }}#subdirectory={{ cookiecutter.remote_git_dir }}",
+  "__remote_git_pip_install_ssh": "{% if cookiecutter.remote_git_dir == '' -%} {{cookiecutter.__remote_git_pip_install_ssh_repo }} {% else -%} {{ cookiecutter.__project_dash }} @ {{ cookiecutter.__remote_git_pip_install_https_dir }} {% endif -%}",
+  "__remote_git_pip_install_path": "{% if cookiecutter.remote_git_private == 'Yes' -%}{{ cookiecutter.__remote_git_pip_install_ssh }}{% else -%}{{ cookiecutter.__remote_git_pip_install_https }}{% endif -%}",
+
+  "add_project_gitignore": ["Yes", "No"],
+
+  "add_twine_support": ["Yes", "No"],
+  "twine_repository": "",
+  "__twine_repository_url": "{% if cookiecutter.twine_repository != '' -%}--repository-url=\"{{ cookiecutter.twine_repository }}\"{% else -%}{% endif -%}",
+  "__twine_pip_index_url": "{% if cookiecutter.twine_repository != '' -%}--index-url=\"{{ cookiecutter.twine_repository }}\"{% else -%}{% endif -%}",
 
   "__creator": "{{ cookiecutter.author_name }}",
   "__owner": "{% if cookiecutter.company != '' %}{{ cookiecutter.company }}{% else %}{{ cookiecutter.author_name }}{% endif %}",
 
   "__prompts__": {
-    "remote_git_dir": "remote_git_dir ('-' for default `<ns>/<ns>-<pkg>`)"
+    "twine_repository": "twine_repository (default is PyPI)"
   }
 }

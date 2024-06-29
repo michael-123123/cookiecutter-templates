@@ -6,7 +6,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"{{ cookiecutter.project_slug }}"
+project = u"{{ cookiecutter.__project_dash }}"
 copyright = u"{% now 'local', '%Y' %}, {{ cookiecutter.__owner }}"
 author = u"{{ cookiecutter.author_name }}"
 

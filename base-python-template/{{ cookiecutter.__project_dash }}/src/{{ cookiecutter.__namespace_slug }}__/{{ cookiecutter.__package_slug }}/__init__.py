@@ -3,7 +3,7 @@ import logging
 import pathlib
 
 
-__version__ = importlib.metadata.version("{{ cookiecutter.project_slug }}")
+__version__ = importlib.metadata.version("{{ cookiecutter.__project_dash }}")
 """ Package version -- read only value """
 
 

@@ -3,7 +3,6 @@ import os
 import pathlib
 import shutil
 import sys
-import tomllib
 
 
 ##############################################################################
@@ -24,12 +23,6 @@ def copy(from_file, to_file):
 
 def move(from_file, to_file):
     shutil.move(from_file, to_file)
-
-
-def parse_python_version(version: str, default: str) -> str:
-    start = next((i for i, c in enumerate(version) if c in "0123456789."), len(version))
-    end = next((j for j, c in reversed(list(enumerate(version))) if c in "0123456789."), len(version)-1) + 1
-    return version[start:end] if start < end else default
 
 
 class SwitchSysPath:
@@ -82,19 +75,17 @@ with SuppressExceptionsAndWarn('remove license file'):
 with SuppressExceptionsAndWarn('setting up gitignore file'):
     if has_gitignore:
         copy("dotgitignore", ".gitignore")
-        remove("dotgitignore")
-    else:
-        remove("dotgitignore")
+    remove("dotgitignore")
 
 
 # Remove namespace package if not a namespace lib
 namespace = "{{ cookiecutter.namespace }}"
 namespace = namespace.strip()
 if namespace:
-    move("src/{{ cookiecutter.namespace_slug }}__", "src/{{ cookiecutter.namespace_slug }}")
-    remove("src/{{ cookiecutter.package_slug }}/")
+    move("src/{{ cookiecutter.__namespace_slug }}__", "src/{{ cookiecutter.__namespace_slug }}")
+    remove("src/{{ cookiecutter.__package_slug }}/")
 else:
-    remove("src/{{ cookiecutter.namespace_slug }}__/")
+    remove("src/{{ cookiecutter.__namespace_slug }}__/")
 
 
 # Create requirements.txt and environment.yml files

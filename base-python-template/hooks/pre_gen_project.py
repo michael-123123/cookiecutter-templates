@@ -1,22 +1,22 @@
 import sys
+from string import ascii_letters
+
 
 # debug
 # print(""" { {  cookiecutter | jsonify } } """)
 
+
 # if package is empty - fail
-if not "{{ cookiecutter.package_slug }}":
-    print("error: cannot have empty package name!", file=sys.stderr)
+project_dash = "{{ cookiecutter.__project_dash }}"
+if not project_dash or project_dash[0] not in ascii_letters:
+    print(f"error: invalid project name `{project_dash}`!", file=sys.stderr)
     sys.exit(1)
 
 
-# update remote git dir to default (if exists)
-"""{% if cookiecutter.remote_git_dir == '-' %}
-    {{ cookiecutter.update(
-        {
-            "remote_git_dir": cookiecutter.__default_lib_path + '/' + cookiecutter.project_slug,
-        }
-    )}}
-    {% endif %}
-"""
+package_slug = "{{ cookiecutter.__package_slug }}"
+if not package_slug or package_slug[0] not in ascii_letters:
+    print(f"error: invalid package name `{package_slug}`!", file=sys.stderr)
+    sys.exit(1)
+
 
 sys.exit(0)

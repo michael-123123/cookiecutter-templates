@@ -13,7 +13,7 @@ build-backend = "setuptools.build_meta"
 # Project info:
 # -------------
 [project]
-name = "{{ cookiecutter.project_slug }}"
+name = "{{ cookiecutter.__project_dash }}"
 version = "{{ cookiecutter.project_version }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = [{name="{{ cookiecutter.author_name }}", email="{{ cookiecutter.author_email }}"}]
@@ -79,12 +79,12 @@ Repository = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_g
 # dependencies = {file = ["requirements.txt"]}
 
 
-{% if cookiecutter.namespace_slug != '' %}
+{% if cookiecutter.__namespace_slug != '' %}
 # --------------------------
 # Handle namespace packages:
 # --------------------------
 [tool.setuptools.packages.find]
 # namespaces = true  # not required -- default, but here for documentation
 where = ["src"]
-include = ["{{ cookiecutter.namespace_slug }}", "{{ cookiecutter.namespace_slug }}.*"]
+include = ["{{ cookiecutter.__namespace_slug }}", "{{ cookiecutter.__namespace_slug }}.*"]
 {% endif %}

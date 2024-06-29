@@ -5,3 +5,5 @@ build/
 __pycache__/
 .coverage
 dist/
+Thumbs.db
+.DS_Store
