@@ -40,7 +40,7 @@ def generate_requirements_files(pyproject_defs: dict,
 
 
 def main(args=None, do_exit: bool = True) -> int:
-    if do_exit:
+    if not do_exit:
         try:
             _main(args)
         except SystemExit as e:
@@ -120,4 +120,4 @@ def _main(args=None):
 
 
 if __name__ == '__main__':
-    main()
+    _main()

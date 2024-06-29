@@ -100,6 +100,19 @@ def _parser(progname=None):
     return parser
 
 
+def main(progname=None, args=None, do_exit: bool = True) -> int:
+    if not do_exit:
+        try:
+            _main(progname, args)
+        except SystemExit as e:
+            return e.code
+        except BaseException:  # noqa
+            return 1
+        return 0
+    else:
+        _main(progname, args)
+
+
 def _main(progname=None, args=None):
     parser = _parser(progname)
     ns = parser.parse_args(args)

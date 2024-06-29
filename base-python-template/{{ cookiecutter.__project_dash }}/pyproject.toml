@@ -22,7 +22,10 @@ license = {file = "LICENSE"}
 readme = "README.md"
 
 # Additional info - can be filled in manually later
-keywords = []
+keywords = [
+
+]
+
 classifiers = [
     "Programming Language :: Python",
 ]
@@ -41,15 +44,22 @@ dependencies = [
 # key=[packages...]
 #     defines a special optional dependency which is installed
 #     pip install mypackage[key]
-dev = [
-    "pytest",
-    "pytest-cov",
+doc = [
     "jupyter",
     "myst-nb",
     "sphinx-autoapi",
     "sphinx-rtd-theme",
     "sphinx-markdown-builder",
-    "tomlkit"
+]
+
+test = [
+    "pytest",
+    "pytest-cov",
+]
+
+dev = [
+    "{{ cookiecutter.__project_dash }}[doc, test]",
+    "tomlkit",
 ]
 
 

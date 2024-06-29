@@ -14,7 +14,7 @@ TWINE_INDEX_ARG := {{ cookiecutter.__twine_pip_index_url }}
 
 # Package info
 PACKAGE_NAME  = "{{ cookiecutter.__project_dash }}"
-VERSION      := $(shell $(PYTHON) ./scripts/pyproject_version_manager.py --project-file=pyproject.toml get)
+VERSION      := $(shell $(PYTHON) ./scripts/pyproject_version_manager.py --pyproject=pyproject.toml get)
 
 
 # Targets
@@ -35,7 +35,7 @@ clean:
 build-tools:
 	$(PIP) install --upgrade setuptools build
 
-build: build-tools:
+build: build-tools
 	$(BUILD)
 
 
@@ -78,4 +78,4 @@ doc-%:
 
 
 
-.PHONY: all help clean build-tools build twine-tools twine install-test install-dev install-latest install
+.PHONY: all help clean build-tools build twine-tools twine install-test install-dev install-latest install doc
