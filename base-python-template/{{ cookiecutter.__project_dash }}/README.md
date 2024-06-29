@@ -5,6 +5,27 @@
 
 ## Installation
 
+{% if cookiecutter.add_twine_support == 'Yes' -%}
+Install with `pip`:
+```shell
+pip install --upgrade {{ cookiecutter.__twine_pip_index_url }} {{ cookiecutter.__project_dash }}
+```
+{% else -%}
+{% endif -%}
+
+
+Install latest version from `git` repository:
+```shell
+pip install "{{ cookiecutter.__remote_git_pip_install_path }}"
+```
+
+
+Install from source:
+```shell
+git clone {{ cookiecutter.__remote_git_base_path }}.git
+cd {{ cookiecutter.__project_dash }} 
+pip install .
+```
 
 
 ## Usage

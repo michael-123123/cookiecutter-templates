@@ -67,13 +67,13 @@ dev = [
 # URLs
 [project.urls]
 {% if cookiecutter.remote_git_dir != '' -%}
-Homepage = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}/-/tree/{{ cookiecutter.remote_git_branch }}/{{ cookiecutter.remote_git_dir }}"
-Documentation = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}/-/tree/{{ cookiecutter.remote_git_branch }}/{{ cookiecutter.remote_git_dir }}/docs"
+Homepage = "{{ cookiecutter.__remote_git_branch_path }}/{{ cookiecutter.remote_git_dir }}"
+Documentation = "{{ __remote_git_branch_path }}/{{ cookiecutter.remote_git_dir }}/doc"
 {% else -%}
-Homepage = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}"
-Documentation = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}/-/tree/{{ cookiecutter.remote_git_branch }}/docs"
+Homepage = "{{ cookiecutter.__remote_git_base_path }}"
+Documentation = "{{ cookiecutter.__remote_git_branch_path }}/doc"
 {% endif -%}
-Repository = "https://{{ cookiecutter.remote_git_url }}/{{ cookiecutter.remote_git_repo }}.git"
+Repository = "{{ cookiecutter.__remote_git_base_path }}.git"
 {% endif %}
 
 
